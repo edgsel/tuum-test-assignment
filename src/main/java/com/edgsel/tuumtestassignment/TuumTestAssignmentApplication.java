@@ -9,5 +9,4 @@ public class TuumTestAssignmentApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TuumTestAssignmentApplication.class, args);
 	}
-
 }
