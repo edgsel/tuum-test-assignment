@@ -1,7 +1,11 @@
 package com.edgsel.tuumtestassignment.myBatis;
 
 import com.edgsel.tuumtestassignment.myBatis.enums.Currency;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.List;
