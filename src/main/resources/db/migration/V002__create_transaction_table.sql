@@ -3,7 +3,7 @@ CREATE TYPE transaction_types AS ENUM (
     'OUT'
     );
 
-CREATE TABLE "transaction"
+CREATE TABLE transactions
 (
     id               SERIAL PRIMARY KEY NOT NULL,
     account_id       INT                NOT NULL,
@@ -19,6 +19,6 @@ CREATE TABLE "transaction"
 
 CREATE TRIGGER transaction_upd_trigger
     BEFORE UPDATE
-    ON "transaction"
+    ON transactions
     FOR EACH ROW
 EXECUTE PROCEDURE upd_timestamp();

@@ -1,4 +1,4 @@
-CREATE TABLE "account"
+CREATE TABLE accounts
 (
     id          SERIAL PRIMARY KEY NOT NULL,
     customer_id BIGINT             NOT NULL,
@@ -11,8 +11,8 @@ CREATE TABLE "account"
 
 create TRIGGER "account_upd_trigger"
     BEFORE UPDATE
-    ON "account"
+    ON accounts
     FOR EACH ROW
 EXECUTE PROCEDURE upd_timestamp();
 
-CREATE INDEX customer_id_idx ON "account" (customer_id);
+CREATE INDEX customer_id_idx ON accounts (customer_id);
