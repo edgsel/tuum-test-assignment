@@ -1,7 +1,7 @@
 CREATE TABLE accounts
 (
     id          SERIAL PRIMARY KEY NOT NULL,
-    customer_id BIGINT             NOT NULL,
+    customer_id VARCHAR(255)       NOT NULL,
     country     VARCHAR(255),
     currencies  TEXT[],
     create_time TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,

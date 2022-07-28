@@ -2,14 +2,16 @@ package com.edgsel.tuumtestassignment.myBatis;
 
 import com.edgsel.tuumtestassignment.myBatis.enums.Currency;
 import com.edgsel.tuumtestassignment.myBatis.enums.TransactionType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Transaction {
 
     private long id;

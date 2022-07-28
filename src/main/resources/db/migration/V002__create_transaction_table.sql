@@ -14,7 +14,7 @@ CREATE TABLE transactions
     update_time      TIMESTAMP                   DEFAULT CURRENT_TIMESTAMP,
     delete_time      TIMESTAMP                   DEFAULT NULL,
     CONSTRAINT fk_account_id
-        FOREIGN KEY (account_id) REFERENCES "account" (id)
+        FOREIGN KEY (account_id) REFERENCES "accounts" (id)
 );
 
 CREATE TRIGGER transaction_upd_trigger
