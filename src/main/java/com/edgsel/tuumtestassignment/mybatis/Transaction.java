@@ -1,7 +1,7 @@
-package com.edgsel.tuumtestassignment.myBatis;
+package com.edgsel.tuumtestassignment.mybatis;
 
-import com.edgsel.tuumtestassignment.myBatis.enums.Currency;
-import com.edgsel.tuumtestassignment.myBatis.enums.TransactionType;
+import com.edgsel.tuumtestassignment.mybatis.enums.Currency;
+import com.edgsel.tuumtestassignment.mybatis.enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;

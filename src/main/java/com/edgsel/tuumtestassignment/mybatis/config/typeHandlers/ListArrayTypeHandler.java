@@ -1,11 +1,15 @@
-package com.edgsel.tuumtestassignment.config.typeHandlers;
+package com.edgsel.tuumtestassignment.mybatis.config.typeHandlers;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

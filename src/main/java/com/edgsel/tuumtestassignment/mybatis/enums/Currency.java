@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.myBatis.enums;
+package com.edgsel.tuumtestassignment.mybatis.enums;
 
 public enum Currency {
     EUR,

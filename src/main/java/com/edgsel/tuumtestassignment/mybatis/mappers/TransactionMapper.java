@@ -1,6 +1,6 @@
-package com.edgsel.tuumtestassignment.myBatis.mappers;
+package com.edgsel.tuumtestassignment.mybatis.mappers;
 
-import com.edgsel.tuumtestassignment.myBatis.Transaction;
+import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
