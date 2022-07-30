@@ -34,7 +34,7 @@ public class AccountMapperTest {
         Account account = Account.builder()
             .customerId("test-customer-uuid")
             .country("EST")
-            .currencies(Collections.singletonList(Currency.EUR))
+            .currencies(Collections.singletonList("EUR"))
             .build();
 
         accountMapper.insert(account);
@@ -48,6 +48,7 @@ public class AccountMapperTest {
         assertThat(account.getId()).isEqualTo(accountId);
         assertThat(account.getCustomerId()).isEqualTo("test-customer-uuid");
         assertThat(account.getCountry()).isEqualTo("EST");
+        assertThat(account.getCurrencies()).isNotEmpty();
         assertNotNull(account.getCurrencies());
     }
 }

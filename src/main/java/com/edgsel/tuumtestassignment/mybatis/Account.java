@@ -23,7 +23,7 @@ public class Account {
 
     private String country;
 
-    private List<Currency> currencies;
+    private List<String> currencies;
 
     private LocalDateTime createTime;
 

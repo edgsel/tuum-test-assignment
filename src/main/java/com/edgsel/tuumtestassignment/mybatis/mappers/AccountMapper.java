@@ -22,5 +22,5 @@ public interface AccountMapper {
 
     @Insert("INSERT INTO accounts(customer_id, country, currencies) VALUES (#{customerId}, #{country}, #{currencies, typeHandler=com.edgsel.tuumtestassignment.config.mybatis.typeHandlers.ListArrayTypeHandler})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    int insert(Account account);
+    void insert(Account account);
 }
