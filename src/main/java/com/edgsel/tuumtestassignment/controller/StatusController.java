@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @RestController
+@RequestMapping(value = "/api/v1", produces = {"application/json"})
 public class StatusController {
 
-    @RequestMapping("/api/v1/status")
+    @RequestMapping(value = "/status", method = GET)
     public ResponseEntity<Map<String, Boolean>> getApiStatus() {
         Map<String, Boolean> response = new HashMap<>();
 
