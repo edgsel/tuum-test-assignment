@@ -54,9 +54,7 @@ public class AccountService {
             Map<String, BigDecimal> initialBalances = new HashMap<>();
 
             if (isEmpty(transactions)) {
-
                 for (String currency: existingAccount.getCurrencies()) {
-                    System.out.println(currency);
                     initialBalances.put(currency, new BigDecimal("0.00"));
                 }
             }
