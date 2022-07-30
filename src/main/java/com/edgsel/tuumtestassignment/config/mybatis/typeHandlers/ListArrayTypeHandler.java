@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.mybatis.config.typeHandlers;
+package com.edgsel.tuumtestassignment.config.mybatis.typeHandlers;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

@@ -9,5 +9,4 @@ class TuumTestAssignmentApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

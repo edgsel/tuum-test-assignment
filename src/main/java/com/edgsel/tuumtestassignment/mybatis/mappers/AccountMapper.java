@@ -1,6 +1,6 @@
 package com.edgsel.tuumtestassignment.mybatis.mappers;
 
-import com.edgsel.tuumtestassignment.mybatis.config.typeHandlers.ListArrayTypeHandler;
+import com.edgsel.tuumtestassignment.config.mybatis.typeHandlers.ListArrayTypeHandler;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Results;
@@ -24,6 +24,6 @@ public interface AccountMapper {
     })
     Account findByAccountId(String accountId);
 
-    @Insert("INSERT INTO accounts(account_id, customer_id, country, currencies) VALUES (#{accountId}, #{customerId}, #{country}, #{currencies, typeHandler=com.edgsel.tuumtestassignment.mybatis.config.typeHandlers.ListArrayTypeHandler})")
+    @Insert("INSERT INTO accounts(account_id, customer_id, country, currencies) VALUES (#{accountId}, #{customerId}, #{country}, #{currencies, typeHandler=com.edgsel.tuumtestassignment.config.mybatis.typeHandlers.ListArrayTypeHandler})")
     void insert(Account account);
 }
