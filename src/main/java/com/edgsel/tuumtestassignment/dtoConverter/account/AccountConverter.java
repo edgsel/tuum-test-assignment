@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.dtoConverters.account;
+package com.edgsel.tuumtestassignment.dtoConverter.account;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountDTO;
 import com.edgsel.tuumtestassignment.mybatis.Account;
