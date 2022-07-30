@@ -1,7 +1,6 @@
 CREATE TABLE accounts
 (
     id          SERIAL PRIMARY KEY NOT NULL,
-    account_id  VARCHAR            NOT NULL,
     customer_id VARCHAR            NOT NULL,
     country     VARCHAR,
     currencies  TEXT[],

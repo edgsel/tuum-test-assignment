@@ -1,8 +1,7 @@
 CREATE TABLE transactions
 (
     id               SERIAL PRIMARY KEY NOT NULL,
-    transaction_id   VARCHAR            NOT NULL,
-    account_id       VARCHAR            NOT NULL,
+    account_id       INT                NOT NULL,
     amount           DECIMAL(10, 2)              DEFAULT 0.00,
     currency         VARCHAR,
     transaction_type VARCHAR            NOT NULL,

@@ -25,25 +25,27 @@ public class TransactionMapperTest {
     @Autowired
     private TransactionMapper transactionMapper;
 
+    private long transactionId;
+
     @Before
     public void insertTransaction() {
         Transaction transaction = Transaction.builder()
-            .transactionId("test-transaction-uuid")
-            .accountId("test-account-id")
+            .accountId(1L)
             .amount(new BigDecimal("6.66"))
             .currency(Currency.GBP)
             .transactionType(TransactionType.IN)
             .build();
 
         transactionMapper.insert(transaction);
+        transactionId = transaction.getId();
     }
 
     @Test
     public void getByTransactionIdTest() {
-        Transaction transaction = transactionMapper.getByTransactionId("test-transaction-uuid");
+        Transaction transaction = transactionMapper.getByTransactionId(transactionId);
 
-        assertThat(transaction.getTransactionId()).isEqualTo("test-transaction-uuid");
-        assertThat(transaction.getAccountId()).isEqualTo("test-account-id");
+        assertThat(transaction.getId()).isEqualTo(transactionId);
+        assertThat(transaction.getAccountId()).isEqualTo(1L);
         assertThat(transaction.getAmount()).isEqualTo("6.66");
         assertThat(transaction.getCurrency().name()).isEqualTo("GBP");
         assertThat(transaction.getTransactionType().name()).isEqualTo("IN");
@@ -51,7 +53,7 @@ public class TransactionMapperTest {
 
     @Test
     public void getAllByAccountIdTest() {
-        List<Transaction> allTransactionsByAccountId = transactionMapper.getAllByAccountId("test-account-id");
+        List<Transaction> allTransactionsByAccountId = transactionMapper.getAllByAccountId(1L);
 
         assertFalse(allTransactionsByAccountId.isEmpty());
     }
