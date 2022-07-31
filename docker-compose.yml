@@ -1,6 +1,11 @@
 version: '3'
 services:
   postgresdb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     image: "postgres:latest"
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U"]
@@ -15,3 +20,18 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
       - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: tuum-api
+    ports:
+      - "8091:8080"
+    depends_on:
+      - postgresdb
+    networks:
+      - default
+    links:
+      - "postgresdb"

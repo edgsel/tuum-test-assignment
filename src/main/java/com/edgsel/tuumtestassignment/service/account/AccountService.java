@@ -10,6 +10,7 @@ import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
 import com.edgsel.tuumtestassignment.mybatis.mappers.TransactionMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import java.util.Map;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
+@Slf4j
 public class AccountService {
 
     private final AccountConverter accountConverter;
@@ -43,6 +45,7 @@ public class AccountService {
 
         accountMapper.insert(account);
 
+        log.info("Account with ID {} saved into database", account.getId());
         return account.getId();
     }
 
@@ -50,10 +53,12 @@ public class AccountService {
         Account existingAccount = accountMapper.findById(accountId);
 
         if (existingAccount != null) {
+            log.info("Account with ID {} found", existingAccount.getId());
             List<Transaction> transactions = transactionMapper.getAllByAccountId(accountId);
             Map<String, BigDecimal> initialBalances = new HashMap<>();
 
             if (isEmpty(transactions)) {
+                log.warn("Account with ID {} does not have any transactions", accountId);
                 for (String currency : existingAccount.getCurrencies()) {
                     initialBalances.put(currency, new BigDecimal("0.00"));
                 }
