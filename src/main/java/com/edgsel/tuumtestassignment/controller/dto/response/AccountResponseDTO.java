@@ -1,6 +1,7 @@
 package com.edgsel.tuumtestassignment.controller.dto.response;
 
 import lombok.Data;
+
 import java.util.List;
 
 @Data

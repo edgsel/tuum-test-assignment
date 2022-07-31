@@ -10,27 +10,27 @@ public interface TransactionMapper {
 
     @Select("SELECT * FROM transactions WHERE id = #{id} AND delete_time IS NULL")
     @Results(value = {
-            @Result(property = "id", column = "id"),
-            @Result(property = "accountId", column = "account_id"),
-            @Result(property = "amount", column = "amount"),
-            @Result(property = "currency", column = "currency"),
-            @Result(property = "transactionType", column = "transaction_type"),
-            @Result(property = "createTime", column = "create_time"),
-            @Result(property = "updateTime", column = "update_time"),
-            @Result(property = "delete_time", column = "delete_time")
+        @Result(property = "id", column = "id"),
+        @Result(property = "accountId", column = "account_id"),
+        @Result(property = "amount", column = "amount"),
+        @Result(property = "currency", column = "currency"),
+        @Result(property = "transactionType", column = "transaction_type"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "updateTime", column = "update_time"),
+        @Result(property = "delete_time", column = "delete_time")
     })
     Transaction getByTransactionId(long id);
 
     @Select("SELECT * FROM transactions WHERE account_id = #{accountId} AND delete_time IS NULL")
     @Results(value = {
-            @Result(property = "id", column = "id"),
-            @Result(property = "accountId", column = "account_id"),
-            @Result(property = "amount", column = "amount"),
-            @Result(property = "currency", column = "currency"),
-            @Result(property = "transactionType", column = "transaction_type"),
-            @Result(property = "createTime", column = "create_time"),
-            @Result(property = "updateTime", column = "update_time"),
-            @Result(property = "delete_time", column = "delete_time")
+        @Result(property = "id", column = "id"),
+        @Result(property = "accountId", column = "account_id"),
+        @Result(property = "amount", column = "amount"),
+        @Result(property = "currency", column = "currency"),
+        @Result(property = "transactionType", column = "transaction_type"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "updateTime", column = "update_time"),
+        @Result(property = "delete_time", column = "delete_time")
     })
     List<Transaction> getAllByAccountId(long accountId);
 

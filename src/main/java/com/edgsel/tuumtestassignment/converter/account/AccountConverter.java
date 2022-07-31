@@ -1,15 +1,10 @@
-package com.edgsel.tuumtestassignment.dtoConverter.account;
+package com.edgsel.tuumtestassignment.converter.account;
 
-import com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
-import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.mybatis.Account;
-import com.edgsel.tuumtestassignment.mybatis.enums.Currency;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 public class AccountConverter {

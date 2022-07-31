@@ -10,13 +10,13 @@ public interface AccountMapper {
 
     @Select("SELECT * FROM accounts WHERE id = #{id}")
     @Results(value = {
-            @Result(property = "id", column = "id"),
-            @Result(property = "country", column = "country"),
-            @Result(property = "customerId", column = "customer_id"),
-            @Result(property = "currencies", column = "currencies", typeHandler = ListArrayTypeHandler.class, jdbcType = JdbcType.ARRAY),
-            @Result(property = "createTime", column = "create_time"),
-            @Result(property = "updateTime", column = "update_time"),
-            @Result(property = "delete_time", column = "delete_time")
+        @Result(property = "id", column = "id"),
+        @Result(property = "country", column = "country"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "currencies", column = "currencies", typeHandler = ListArrayTypeHandler.class, jdbcType = JdbcType.ARRAY),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "updateTime", column = "update_time"),
+        @Result(property = "delete_time", column = "delete_time")
     })
     Account findById(long id);
 

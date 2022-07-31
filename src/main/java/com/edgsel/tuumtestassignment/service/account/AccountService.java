@@ -3,7 +3,7 @@ package com.edgsel.tuumtestassignment.service.account;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
-import com.edgsel.tuumtestassignment.dtoConverter.account.AccountConverter;
+import com.edgsel.tuumtestassignment.converter.account.AccountConverter;
 import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
 import com.edgsel.tuumtestassignment.helper.BalanceHelper;
 import com.edgsel.tuumtestassignment.mybatis.Account;
@@ -29,9 +29,9 @@ public class AccountService {
     private final TransactionMapper transactionMapper;
 
     public AccountService(
-            AccountConverter accountConverter,
-            AccountMapper accountMapper,
-            TransactionMapper transactionMapper
+        AccountConverter accountConverter,
+        AccountMapper accountMapper,
+        TransactionMapper transactionMapper
     ) {
         this.accountConverter = accountConverter;
         this.accountMapper = accountMapper;
@@ -54,7 +54,7 @@ public class AccountService {
             Map<String, BigDecimal> initialBalances = new HashMap<>();
 
             if (isEmpty(transactions)) {
-                for (String currency: existingAccount.getCurrencies()) {
+                for (String currency : existingAccount.getCurrencies()) {
                     initialBalances.put(currency, new BigDecimal("0.00"));
                 }
             }
@@ -67,6 +67,6 @@ public class AccountService {
             return response;
         }
 
-        throw new AccountNotFoundException("Account with ID " + accountId +  " not found");
+        throw new AccountNotFoundException("Account with ID " + accountId + " not found");
     }
 }
