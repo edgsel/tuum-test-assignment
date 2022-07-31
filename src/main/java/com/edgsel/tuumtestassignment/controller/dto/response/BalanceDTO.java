@@ -1,6 +1,7 @@
 package com.edgsel.tuumtestassignment.controller.dto.response;
 
 import com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class BalanceDTO {
 
     private CurrencyDTO currency;

@@ -2,15 +2,21 @@ package com.edgsel.tuumtestassignment.controller.dto.request;
 
 import com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@AllArgsConstructor
 public class AccountRequestDTO {
 
     @NotNull(message = "Customer ID cannot be null")
