@@ -20,9 +20,7 @@ public class Transaction {
 
     private long id;
 
-    private String transactionId;
-
-    private String accountId;
+    private long accountId;
 
     private BigDecimal amount;
 

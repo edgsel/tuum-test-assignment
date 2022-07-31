@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.mybatis.config;
+package com.edgsel.tuumtestassignment.config.mybatis;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
