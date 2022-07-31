@@ -4,6 +4,11 @@ import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
 import com.edgsel.tuumtestassignment.service.account.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +32,14 @@ public class AccountController {
         this.accountValidator = accountValidator;
     }
 
+    @Operation(summary = "Create banking account")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Banking account created",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = AccountResponseDTO.class))}),
+        @ApiResponse(responseCode = "400", description = "Request body validation failed",
+            content = @Content)
+    })
     @RequestMapping(value = "/account", method = POST)
     public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO accountRequest) {
         accountValidator.validate(accountRequest);
