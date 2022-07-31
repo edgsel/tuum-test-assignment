@@ -4,10 +4,10 @@ import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.dtoConverter.account.AccountConverter;
+import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
 import com.edgsel.tuumtestassignment.helper.BalanceHelper;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
-import com.edgsel.tuumtestassignment.mybatis.enums.Currency;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
 import com.edgsel.tuumtestassignment.mybatis.mappers.TransactionMapper;
 import org.springframework.stereotype.Service;
@@ -67,6 +67,6 @@ public class AccountService {
             return response;
         }
 
-        throw new RuntimeException("Account not found");
+        throw new AccountNotFoundException("Account with ID " + accountId +  " not found");
     }
 }

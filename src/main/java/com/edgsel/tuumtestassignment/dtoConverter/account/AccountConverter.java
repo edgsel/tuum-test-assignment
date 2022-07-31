@@ -25,7 +25,6 @@ public class AccountConverter {
     }
 
     public AccountResponseDTO entityToDto(Account account) {
-        System.out.println(account.getId());
         return modelMapper.map(account, AccountResponseDTO.class);
     }
 }
