@@ -50,3 +50,9 @@ Run the project:
 
 ## API docs
 * for Storage API docs go to `http://localhost:8091/api/v1/swagger-ui/index.html`
+
+## What is missing
+* Transaction endpoints (GET/POST)
+* Transaction service
+* RabbitMQ queue messaging (in docer-compose)
+* Dockerfile
