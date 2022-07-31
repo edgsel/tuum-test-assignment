@@ -32,7 +32,6 @@ public class AccountController {
         accountValidator.validate(accountRequest);
 
         long accountId = accountService.saveAccount(accountRequest);
-
         AccountResponseDTO response = accountService.getAccount(accountId);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
