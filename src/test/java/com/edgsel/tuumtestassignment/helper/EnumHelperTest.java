@@ -1,8 +1,7 @@
-package com.edgsel.tuumtestassignment.mybatis.helper;
+package com.edgsel.tuumtestassignment.helper;
 
 import com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO;
 import com.edgsel.tuumtestassignment.exception.InvalidEnumValueException;
-import com.edgsel.tuumtestassignment.helper.EnumHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

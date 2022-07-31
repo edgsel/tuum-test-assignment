@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.mybatis.service;
+package com.edgsel.tuumtestassignment.service;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
