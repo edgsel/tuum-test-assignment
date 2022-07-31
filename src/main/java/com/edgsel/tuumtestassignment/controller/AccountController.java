@@ -2,6 +2,7 @@ package com.edgsel.tuumtestassignment.controller;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
+import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
 import com.edgsel.tuumtestassignment.service.account.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,17 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    public AccountController(AccountService accountService) {
+    private final AccountValidator accountValidator;
+
+    public AccountController(AccountService accountService, AccountValidator accountValidator) {
         this.accountService = accountService;
+        this.accountValidator = accountValidator;
     }
 
     @RequestMapping(value = "/account", method = POST)
     public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO accountRequest) {
+        accountValidator.validate(accountRequest);
+
         long accountId = accountService.saveAccount(accountRequest);
 
         AccountResponseDTO response = accountService.getAccount(accountId);

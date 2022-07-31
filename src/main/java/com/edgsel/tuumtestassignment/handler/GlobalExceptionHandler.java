@@ -3,6 +3,7 @@ package com.edgsel.tuumtestassignment.handler;
 import com.edgsel.tuumtestassignment.controller.dto.response.ErrorResponseDTO;
 import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
 import com.edgsel.tuumtestassignment.exception.InvalidEnumValueException;
+import com.edgsel.tuumtestassignment.exception.RequestValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,5 +22,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccountNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleNotFoundExceptions(RuntimeException ex) {
         return new ResponseEntity<>(new ErrorResponseDTO(ex.getMessage()), NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequestValidationException.class)
+    public ResponseEntity<ErrorResponseDTO> handleRequestValidationExceptions(RuntimeException ex) {
+        return new ResponseEntity<>(new ErrorResponseDTO(ex.getMessage()), BAD_REQUEST);
     }
 }

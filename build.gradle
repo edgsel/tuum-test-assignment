@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:3.1.0'
 	implementation 'net.sf.oval:oval:3.2.1'
 	implementation 'junit:junit:4.13.2'
+	implementation 'org.apache.commons:commons-collections4:4.4'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'

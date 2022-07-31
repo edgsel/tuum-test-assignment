@@ -13,14 +13,15 @@ import net.sf.oval.constraint.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountRequestDTO {
 
-    @NotNull
+    @NotNull(message = "Customer ID cannot be null")
     @NotEmpty(message = "Customer ID cannot be null or empty")
     private String customerId;
 
-    @NotNull
-    @NotEmpty(message = "Country cannot be null or empty")
+    @NotNull(message = "Country cannot be null")
+    @NotEmpty(message = "Country cannot be empty")
     private String country;
 
+    @NotNull(message = "Currencies cannot be null")
     @NotEmpty(message = "At least one currency should be selected")
     private List<CurrencyDTO> currencies;
 }
