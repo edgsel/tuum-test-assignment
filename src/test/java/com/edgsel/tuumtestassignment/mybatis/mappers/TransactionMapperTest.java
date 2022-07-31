@@ -3,21 +3,18 @@ package com.edgsel.tuumtestassignment.mybatis.mappers;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.enums.Currency;
 import com.edgsel.tuumtestassignment.mybatis.enums.TransactionType;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TransactionMapperTest {
@@ -27,7 +24,7 @@ public class TransactionMapperTest {
 
     private long transactionId;
 
-    @Before
+    @BeforeEach
     public void insertTransaction() {
         Transaction transaction = Transaction.builder()
             .accountId(1L)
