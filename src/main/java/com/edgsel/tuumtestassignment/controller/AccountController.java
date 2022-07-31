@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/api/v1", produces = {"application/json"})
+@Slf4j
 public class AccountController {
 
     private final AccountService accountService;
@@ -42,6 +44,7 @@ public class AccountController {
     })
     @RequestMapping(value = "/account", method = POST)
     public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO accountRequest) {
+        log.info("Create account method called");
         accountValidator.validate(accountRequest);
 
         long accountId = accountService.saveAccount(accountRequest);
@@ -60,6 +63,7 @@ public class AccountController {
     })
     @RequestMapping(value = "/account/{accountId}", method = GET)
     public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable long accountId) {
+        log.info("Get account method called");
         AccountResponseDTO response = accountService.getAccount(accountId);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
