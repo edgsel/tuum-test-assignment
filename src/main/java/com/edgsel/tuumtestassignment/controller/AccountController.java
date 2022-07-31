@@ -50,6 +50,14 @@ public class AccountController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "Find banking account by account ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Banking account found",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = AccountResponseDTO.class))}),
+        @ApiResponse(responseCode = "404", description = "Banking account not found",
+            content = @Content)
+    })
     @RequestMapping(value = "/account/{accountId}", method = GET)
     public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable long accountId) {
         AccountResponseDTO response = accountService.getAccount(accountId);
