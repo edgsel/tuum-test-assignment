@@ -58,5 +58,4 @@ Run the project:
 ## What is missing
 * Transaction endpoints (GET/POST)
 * Transaction service
-* RabbitMQ queue messaging (in docer-compose)
-* Dockerfile
+* RabbitMQ
