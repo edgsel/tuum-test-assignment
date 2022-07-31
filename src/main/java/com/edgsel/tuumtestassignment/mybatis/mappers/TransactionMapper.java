@@ -1,7 +1,12 @@
 package com.edgsel.tuumtestassignment.mybatis.mappers;
 
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
 
