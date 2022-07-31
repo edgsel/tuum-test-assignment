@@ -1,6 +1,5 @@
 package com.edgsel.tuumtestassignment.mybatis;
 
-import com.edgsel.tuumtestassignment.mybatis.enums.Currency;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
