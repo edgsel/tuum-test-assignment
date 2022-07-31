@@ -27,24 +27,28 @@ Docker 4.6.1+
 
 `COMPOSE_DOCKER_CLI_BUILD=0`
 
+# To run application locally
+
 ## 1. Export environment variables (Linux/MacOS)
 * `export $(xargs < .env)`
 
-## 2. Start up containers
-* `docker-compose up -d`
+## 2. Start up DB container
+* `docker-compose up -d postgresdb`
 
-## 3. To run the project with Gradle for `MacOS/Linux`:
+## 3. NB! run DB migrations
+* ` ./gradlew flywayMigrate -i`
+
+### To reset DB migrations
+* ` ./gradlew flywayClean -i`
+
+## 4. To run the project with Gradle for `MacOS/Linux`:
 Build the project:
 * `./gradlew clean build`
 
 Run tests:
 * `./gradlew test`
 
-## 4. NB!
-After building and before running the project run DB migrations:
-* ` ./gradlew flywayMigrate -i`
-
-## 4. And then...
+## 5. And then...
 Run the project:
 * `./gradlew bootRun`
 
