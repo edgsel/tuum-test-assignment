@@ -3,7 +3,7 @@ package com.edgsel.tuumtestassignment.controller;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
-import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
+import com.edgsel.tuumtestassignment.controller.validator.RequestValidator;
 import com.edgsel.tuumtestassignment.service.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,12 +28,12 @@ public class AccountControllerTest {
     private AccountService accountService;
 
     @Mock
-    private AccountValidator accountValidator;
+    private RequestValidator requestValidator;
 
     @BeforeEach
     void setUp() {
         openMocks(this);
-        accountController = spy(new AccountController(accountService, accountValidator));
+        accountController = spy(new AccountController(accountService, requestValidator));
     }
 
     @Test

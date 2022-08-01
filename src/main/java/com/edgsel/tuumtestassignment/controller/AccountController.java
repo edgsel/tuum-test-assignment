@@ -2,7 +2,7 @@ package com.edgsel.tuumtestassignment.controller;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
-import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
+import com.edgsel.tuumtestassignment.controller.validator.RequestValidator;
 import com.edgsel.tuumtestassignment.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,11 +27,11 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    private final AccountValidator accountValidator;
+    private final RequestValidator requestValidator;
 
-    public AccountController(AccountService accountService, AccountValidator accountValidator) {
+    public AccountController(AccountService accountService, RequestValidator accountValidator) {
         this.accountService = accountService;
-        this.accountValidator = accountValidator;
+        this.requestValidator = accountValidator;
     }
 
     @Operation(summary = "Create banking account")
@@ -45,7 +45,7 @@ public class AccountController {
     @RequestMapping(value = "/account", method = POST)
     public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO accountRequest) {
         log.info("Create account method called");
-        accountValidator.validate(accountRequest);
+        requestValidator.validateAccount(accountRequest);
 
         long accountId = accountService.saveAccount(accountRequest);
         AccountResponseDTO response = accountService.getAccount(accountId);
