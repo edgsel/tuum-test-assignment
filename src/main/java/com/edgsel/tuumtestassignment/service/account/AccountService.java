@@ -40,8 +40,8 @@ public class AccountService {
         this.transactionMapper = transactionMapper;
     }
 
-    public long saveAccount(AccountRequestDTO accountRequestDTO) {
-        Account account = accountConverter.convertDtoToEntity(accountRequestDTO);
+    public long saveAccount(AccountRequestDTO accountRequest) {
+        Account account = accountConverter.convertDtoToEntity(accountRequest);
 
         accountMapper.insert(account);
 

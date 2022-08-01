@@ -47,11 +47,11 @@ public class AccountServiceTest {
     @Test
     void shouldSaveAccount() {
         Account account = mock(Account.class);
-        AccountRequestDTO accountRequestDTO = mock(AccountRequestDTO.class);
+        AccountRequestDTO accountRequest = mock(AccountRequestDTO.class);
 
-        doReturn(account).when(accountConverter).convertDtoToEntity(accountRequestDTO);
+        doReturn(account).when(accountConverter).convertDtoToEntity(accountRequest);
 
-        accountService.saveAccount(accountRequestDTO);
+        accountService.saveAccount(accountRequest);
 
         verify(accountMapper).insert(account);
     }

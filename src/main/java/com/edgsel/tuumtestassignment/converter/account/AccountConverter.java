@@ -15,8 +15,8 @@ public class AccountConverter {
         this.modelMapper = modelMapper;
     }
 
-    public Account convertDtoToEntity(AccountRequestDTO accountRequestDTO) {
-        return modelMapper.map(accountRequestDTO, Account.class);
+    public Account convertDtoToEntity(AccountRequestDTO accountRequest) {
+        return modelMapper.map(accountRequest, Account.class);
     }
 
     public AccountResponseDTO convertEntityToDto(Account account) {

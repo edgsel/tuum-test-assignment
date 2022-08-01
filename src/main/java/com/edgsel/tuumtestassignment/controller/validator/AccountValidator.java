@@ -21,8 +21,8 @@ public class AccountValidator {
         this.validator = validator;
     }
 
-    public void validate(AccountRequestDTO request) {
-        List<ConstraintViolation> violations = validator.validate(request);
+    public void validate(AccountRequestDTO accountRequest) {
+        List<ConstraintViolation> violations = validator.validate(accountRequest);
 
         if (isNotEmpty(violations)) {
             String errors = violations.stream()
