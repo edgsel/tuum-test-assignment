@@ -19,7 +19,7 @@ public class AccountConverter {
         return modelMapper.map(accountRequestDTO, Account.class);
     }
 
-    public AccountResponseDTO entityToDto(Account account) {
+    public AccountResponseDTO convertEntityToDto(Account account) {
         return modelMapper.map(account, AccountResponseDTO.class);
     }
 }

@@ -65,7 +65,7 @@ public class AccountService {
             }
 
             List<BalanceDTO> balances = BalanceHelper.getBalances(initialBalances);
-            AccountResponseDTO response = accountConverter.entityToDto(existingAccount);
+            AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
 
             response.setBalances(balances);
 

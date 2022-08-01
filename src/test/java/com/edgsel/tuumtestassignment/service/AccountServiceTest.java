@@ -78,7 +78,7 @@ public class AccountServiceTest {
         doReturn(emptyList()).when(transactionMapper).getAllByAccountId(existingAccountId);
         doReturn(new AccountResponseDTO(existingAccountId, "test-customer-id", null))
             .when(accountConverter)
-            .entityToDto(existingAccount);
+            .convertEntityToDto(existingAccount);
 
         AccountResponseDTO response = accountService.getAccount(existingAccountId);
 
