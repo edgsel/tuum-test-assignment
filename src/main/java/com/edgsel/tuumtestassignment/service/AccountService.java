@@ -1,9 +1,9 @@
-package com.edgsel.tuumtestassignment.service.account;
+package com.edgsel.tuumtestassignment.service;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
-import com.edgsel.tuumtestassignment.converter.account.AccountConverter;
+import com.edgsel.tuumtestassignment.converter.AccountConverter;
 import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
 import com.edgsel.tuumtestassignment.helper.BalanceHelper;
 import com.edgsel.tuumtestassignment.mybatis.Account;

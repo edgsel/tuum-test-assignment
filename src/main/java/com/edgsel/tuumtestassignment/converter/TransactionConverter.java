@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.converter.transaction;
+package com.edgsel.tuumtestassignment.converter;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.TransactionRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.TransactionResponseDTO;

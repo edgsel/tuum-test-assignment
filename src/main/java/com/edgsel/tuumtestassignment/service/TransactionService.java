@@ -1,8 +1,8 @@
-package com.edgsel.tuumtestassignment.service.transaction;
+package com.edgsel.tuumtestassignment.service;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.TransactionRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.TransactionResponseDTO;
-import com.edgsel.tuumtestassignment.converter.transaction.TransactionConverter;
+import com.edgsel.tuumtestassignment.converter.TransactionConverter;
 import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;

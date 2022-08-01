@@ -4,7 +4,7 @@ import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
-import com.edgsel.tuumtestassignment.service.account.AccountService;
+import com.edgsel.tuumtestassignment.service.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

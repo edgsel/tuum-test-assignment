@@ -3,7 +3,7 @@ package com.edgsel.tuumtestassignment.controller;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
-import com.edgsel.tuumtestassignment.service.account.AccountService;
+import com.edgsel.tuumtestassignment.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

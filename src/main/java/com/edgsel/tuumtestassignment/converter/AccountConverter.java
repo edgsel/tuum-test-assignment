@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.converter.account;
+package com.edgsel.tuumtestassignment.converter;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
