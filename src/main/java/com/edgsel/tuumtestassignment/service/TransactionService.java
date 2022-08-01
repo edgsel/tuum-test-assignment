@@ -3,7 +3,7 @@ package com.edgsel.tuumtestassignment.service;
 import com.edgsel.tuumtestassignment.controller.dto.request.TransactionRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.TransactionResponseDTO;
 import com.edgsel.tuumtestassignment.converter.TransactionConverter;
-import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
+import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
@@ -37,12 +37,32 @@ public class TransactionService {
     }
 
     public long saveTransaction(TransactionRequestDTO transactionRequest) {
-        Transaction transaction = transactionConverter.convertDtoToEntity(transactionRequest);
+        Account existingAccount = accountMapper.findById(transactionRequest.getAccountId());
 
-        transactionMapper.insert(transaction);
+        if (existingAccount != null) {
+            Transaction transaction = transactionConverter.convertDtoToEntity(transactionRequest);
 
-        log.info("Transaction with ID {} saved into database", transaction.getId());
-        return transaction.getId();
+            transactionMapper.insert(transaction);
+
+            log.info("Transaction with ID {} saved into database", transaction.getId());
+            return transaction.getId();
+        }
+
+        throw new EntityNotFoundException("Account with ID " + transactionRequest.getAccountId() + " not found");
+    }
+
+    public TransactionResponseDTO getTransaction(long transactionId) {
+        Transaction existingTransaction = transactionMapper.getByTransactionId(transactionId);
+
+        if (existingTransaction != null) {
+            log.info("Transaction with ID {} found", transactionId);
+
+            // TODO: balance calculation
+
+            return transactionConverter.convertEntityToDto(existingTransaction);
+        }
+
+        throw new EntityNotFoundException("Transaction with ID " + transactionId + " not found");
     }
 
     public List<TransactionResponseDTO> getTransactionsByAccountId(long accountId) {
@@ -61,6 +81,6 @@ public class TransactionService {
             return emptyList();
         }
 
-        throw new AccountNotFoundException("Account with ID " + accountId + " not found");
+        throw new EntityNotFoundException("Account with ID " + accountId + " not found");
     }
 }

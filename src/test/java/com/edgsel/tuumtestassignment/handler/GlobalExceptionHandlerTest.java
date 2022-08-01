@@ -1,7 +1,7 @@
 package com.edgsel.tuumtestassignment.handler;
 
 import com.edgsel.tuumtestassignment.controller.dto.response.ErrorResponseDTO;
-import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
+import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
 import com.edgsel.tuumtestassignment.exception.InvalidEnumValueException;
 import com.edgsel.tuumtestassignment.exception.RequestValidationException;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +44,7 @@ public class GlobalExceptionHandlerTest {
 
     @Test
     void handleNotFoundExceptions_return404() {
-        AccountNotFoundException exception = new AccountNotFoundException("test message");
+        EntityNotFoundException exception = new EntityNotFoundException("test message");
         ResponseEntity<ErrorResponseDTO> response = handler.handleNotFoundExceptions(exception);
 
         assertEquals(NOT_FOUND, response.getStatusCode());

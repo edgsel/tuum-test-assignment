@@ -4,7 +4,7 @@ import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.converter.AccountConverter;
-import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
+import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
 import com.edgsel.tuumtestassignment.helper.BalanceHelper;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
@@ -72,6 +72,6 @@ public class AccountService {
             return response;
         }
 
-        throw new AccountNotFoundException("Account with ID " + accountId + " not found");
+        throw new EntityNotFoundException("Account with ID " + accountId + " not found");
     }
 }

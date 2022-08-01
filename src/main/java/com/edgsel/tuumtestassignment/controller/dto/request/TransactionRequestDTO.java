@@ -35,7 +35,7 @@ public class TransactionRequestDTO {
 
     @NotNull(message = "Transaction type cannot be null")
     @NotEmpty(message = "Transaction type cannot be empty")
-    private TransactionTypeDTO transactionTypeDTO;
+    private TransactionTypeDTO transactionType;
 
     @NotNull(message = "Transaction type cannot be null")
     @NotEmpty(message = "Transaction type cannot be empty")
