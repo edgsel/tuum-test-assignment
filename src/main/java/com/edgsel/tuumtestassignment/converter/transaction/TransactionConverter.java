@@ -6,6 +6,9 @@ import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class TransactionConverter {
 
@@ -21,5 +24,11 @@ public class TransactionConverter {
 
     public TransactionResponseDTO convertEntityToDto(Transaction transaction) {
         return modelMapper.map(transaction, TransactionResponseDTO.class);
+    }
+
+    public List<TransactionResponseDTO> convertAll(List<Transaction> transactions) {
+        return transactions.stream()
+            .map(this::convertEntityToDto)
+            .collect(Collectors.toList());
     }
 }
