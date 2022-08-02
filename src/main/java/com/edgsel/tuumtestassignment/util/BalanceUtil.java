@@ -57,7 +57,7 @@ public class BalanceUtil {
         return result;
     }
 
-    public static List<BalanceDTO> getBalances(Map<String, BigDecimal> balancesAndCurrencies) {
+    public static List<BalanceDTO> mapBalancesToDto(Map<String, BigDecimal> balancesAndCurrencies) {
         List<BalanceDTO> balances = new ArrayList<>();
 
         balancesAndCurrencies.forEach((key, value) -> {

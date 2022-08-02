@@ -17,6 +17,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.calculateBalances;
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.getInitialBalances;
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.mapBalancesToDto;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
@@ -54,26 +57,29 @@ public class AccountService {
         if (existingAccount != null) {
             log.info("Account with ID {} found", existingAccount.getId());
 
-            Map<String, BigDecimal> rawBalances;
-            List<BalanceDTO> mappedBalances;
+            List<Transaction> transactions = transactionMapper.getAllByAccountId(existingAccount.getId());
+            Map<String, BigDecimal> calculatedBalances = getCalculatedBalances(transactions, existingAccount);
+            List<BalanceDTO> mappedBalances = mapBalancesToDto(calculatedBalances);
 
-            List<Transaction> transactions = transactionMapper.getAllByAccountId(accountId);
             AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
-
-            if (isEmpty(transactions)) {
-                log.warn("Account with ID {} does not have any transactions", accountId);
-                rawBalances = BalanceUtil.getInitialBalances(existingAccount.getCurrencies());
-            } else {
-                log.info("Found {} transactions for account ID {}", transactions.size(), accountId);
-                rawBalances = BalanceUtil.calculateBalances(transactions);
-            }
-
-            mappedBalances = BalanceUtil.getBalances(rawBalances);
             response.setBalances(mappedBalances);
 
             return response;
         }
 
         throw new EntityNotFoundException("Account with ID " + accountId + " not found");
+    }
+
+    private Map<String, BigDecimal> getCalculatedBalances(
+        List<Transaction> existingTransactions,
+        Account existingAccount
+    ) {
+        if (isEmpty(existingTransactions)) {
+            log.warn("Account with ID {} does not have any transactions", existingAccount.getId());
+            return getInitialBalances(existingAccount.getCurrencies());
+        }
+
+        log.info("Found {} transactions for account ID {}", existingTransactions.size(), existingAccount.getId());
+        return calculateBalances(existingTransactions);
     }
 }
