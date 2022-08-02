@@ -5,7 +5,7 @@ import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.converter.AccountConverter;
 import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
-import com.edgsel.tuumtestassignment.helper.BalanceHelper;
+import com.edgsel.tuumtestassignment.util.BalanceUtil;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,20 +53,23 @@ public class AccountService {
 
         if (existingAccount != null) {
             log.info("Account with ID {} found", existingAccount.getId());
+
+            Map<String, BigDecimal> rawBalances;
+            List<BalanceDTO> mappedBalances;
+
             List<Transaction> transactions = transactionMapper.getAllByAccountId(accountId);
-            Map<String, BigDecimal> initialBalances = new HashMap<>();
+            AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
 
             if (isEmpty(transactions)) {
                 log.warn("Account with ID {} does not have any transactions", accountId);
-                for (String currency : existingAccount.getCurrencies()) {
-                    initialBalances.put(currency, new BigDecimal("0.00"));
-                }
+                rawBalances = BalanceUtil.getInitialBalances(existingAccount.getCurrencies());
+            } else {
+                log.info("Found {} transactions for account ID {}", transactions.size(), accountId);
+                rawBalances = BalanceUtil.calculateBalances(transactions);
             }
 
-            List<BalanceDTO> balances = BalanceHelper.getBalances(initialBalances);
-            AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
-
-            response.setBalances(balances);
+            mappedBalances = BalanceUtil.getBalances(rawBalances);
+            response.setBalances(mappedBalances);
 
             return response;
         }

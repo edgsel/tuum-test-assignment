@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Getter
@@ -33,5 +34,5 @@ public class TransactionResponseDTO {
 
     private String description;
 
-    private BigDecimal balance;
+    private List<BalanceDTO> balances;
 }

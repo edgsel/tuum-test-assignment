@@ -56,9 +56,6 @@ public class TransactionService {
 
         if (existingTransaction != null) {
             log.info("Transaction with ID {} found", transactionId);
-
-            // TODO: balance calculation
-
             return transactionConverter.convertEntityToDto(existingTransaction);
         }
 
