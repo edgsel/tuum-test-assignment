@@ -2,6 +2,7 @@ package com.edgsel.tuumtestassignment.controller;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
+import com.edgsel.tuumtestassignment.controller.dto.response.ErrorResponseDTO;
 import com.edgsel.tuumtestassignment.controller.validator.RequestValidator;
 import com.edgsel.tuumtestassignment.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +41,8 @@ public class AccountController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = AccountResponseDTO.class))}),
         @ApiResponse(responseCode = "400", description = "Request body validation failed",
-            content = @Content)
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorResponseDTO.class))})
     })
     @RequestMapping(value = "/account", method = POST)
     public ResponseEntity<AccountResponseDTO> createAccount(@RequestBody AccountRequestDTO accountRequest) {
@@ -59,7 +61,8 @@ public class AccountController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = AccountResponseDTO.class))}),
         @ApiResponse(responseCode = "404", description = "Banking account not found",
-            content = @Content)
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorResponseDTO.class))})
     })
     @RequestMapping(value = "/account/{accountId}", method = GET)
     public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable long accountId) {

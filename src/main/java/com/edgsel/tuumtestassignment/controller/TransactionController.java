@@ -1,9 +1,15 @@
 package com.edgsel.tuumtestassignment.controller;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.TransactionRequestDTO;
+import com.edgsel.tuumtestassignment.controller.dto.response.ErrorResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.TransactionResponseDTO;
 import com.edgsel.tuumtestassignment.controller.validator.RequestValidator;
 import com.edgsel.tuumtestassignment.service.TransactionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +37,18 @@ public class TransactionController {
         this.requestValidator = requestValidator;
     }
 
+    @Operation(summary = "Create transaction")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transaction created",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = TransactionResponseDTO.class))}),
+        @ApiResponse(responseCode = "400", description = "Request body validation failed",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorResponseDTO.class))}),
+        @ApiResponse(responseCode = "404", description = "Account ID not found",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorResponseDTO.class))})
+    })
     @RequestMapping(value = "/transaction", method = POST)
     public ResponseEntity<TransactionResponseDTO> createTransaction(
         @RequestBody TransactionRequestDTO transactionRequest
@@ -44,6 +62,16 @@ public class TransactionController {
         return new ResponseEntity<>(response, OK);
     }
 
+    @Operation(summary = "Get transactions by account ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transactions found",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = TransactionResponseDTO.class))}),
+
+        @ApiResponse(responseCode = "404", description = "Account ID not found",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorResponseDTO.class))})
+    })
     @RequestMapping(value = "/transactions/{accountId}", method = GET)
     public ResponseEntity<List<TransactionResponseDTO>> getTransactions(@PathVariable long accountId) {
         log.info("Get transactions method called");
