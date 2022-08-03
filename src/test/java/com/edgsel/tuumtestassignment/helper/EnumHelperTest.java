@@ -17,7 +17,7 @@ public class EnumHelperTest {
     }
 
     @Test
-    void shouldThrowExceptionIfValueNotFound() {
+    void shouldThrowEntityNotFoundExceptionIfValueNotFound() {
         InvalidEnumValueException ex = assertThrows(
             InvalidEnumValueException.class,
             () -> EnumHelper.create(CurrencyDTO.class, "JPY")

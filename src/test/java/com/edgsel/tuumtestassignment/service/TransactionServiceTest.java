@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.edgsel.tuumtestassignment.controller.dto.enums.TransactionTypeDTO.IN;
-import static com.edgsel.tuumtestassignment.testHelpers.TransactionsTestHelper.getTestingAccount;
-import static com.edgsel.tuumtestassignment.testHelpers.TransactionsTestHelper.getTestingTransaction;
-import static com.edgsel.tuumtestassignment.testHelpers.TransactionsTestHelper.getTestingTransactionRequest;
-import static com.edgsel.tuumtestassignment.testHelpers.TransactionsTestHelper.getTestingTransactionResponse;
+import static com.edgsel.tuumtestassignment.testHelpers.TestHelper.getTestingAccount;
+import static com.edgsel.tuumtestassignment.testHelpers.TestHelper.getTestingTransaction;
+import static com.edgsel.tuumtestassignment.testHelpers.TestHelper.getTestingTransactionRequest;
+import static com.edgsel.tuumtestassignment.testHelpers.TestHelper.getTestingTransactionResponse;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,7 +57,7 @@ public class TransactionServiceTest {
     void shouldSaveTransaction() {
         long existingAccountId = 2L;
         Account account = getTestingAccount(existingAccountId);
-        TransactionRequestDTO transactionRequest = getTestingTransactionRequest(new BigDecimal("1234.44"), IN);
+        TransactionRequestDTO transactionRequest = getTestingTransactionRequest(existingAccountId, new BigDecimal("1234.44"), IN);
 
         Transaction transaction = getTestingTransaction(1L, existingAccountId, new BigDecimal("1234.44"), TransactionType.IN);
 
@@ -73,7 +73,7 @@ public class TransactionServiceTest {
     @Test
     void shouldThrowEntityNotFoundExceptionIfAccountNotFound_saveTransaction() {
         long accountId = 3L;
-        TransactionRequestDTO transactionRequest = getTestingTransactionRequest(new BigDecimal("1234.44"), IN);
+        TransactionRequestDTO transactionRequest = getTestingTransactionRequest(accountId, new BigDecimal("1234.44"), IN);
 
         doReturn(null).when(accountMapper).findById(accountId);
 

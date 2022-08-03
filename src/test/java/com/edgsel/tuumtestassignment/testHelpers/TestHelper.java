@@ -15,7 +15,7 @@ import static com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO.EUR
 import static com.edgsel.tuumtestassignment.controller.dto.enums.TransactionTypeDTO.IN;
 import static java.util.Collections.singletonList;
 
-public class TransactionsTestHelper {
+public class TestHelper {
 
     public static Account getTestingAccount(long id) {
         return Account.builder()
@@ -38,9 +38,9 @@ public class TransactionsTestHelper {
             .build();
     }
 
-    public static TransactionRequestDTO getTestingTransactionRequest(BigDecimal amount, TransactionTypeDTO type) {
+    public static TransactionRequestDTO getTestingTransactionRequest(long accountId, BigDecimal amount, TransactionTypeDTO type) {
         return new TransactionRequestDTO(
-            2L,
+            accountId,
             amount,
             EUR,
             type,
