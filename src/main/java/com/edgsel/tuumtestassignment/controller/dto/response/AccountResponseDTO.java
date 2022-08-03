@@ -36,7 +36,7 @@ public class AccountResponseDTO {
     private String customerId;
 
     @Schema(
-        description = "A list of currencies of the account and balances of the currencies",
+        description = "A list of currencies of the account and balances",
         type = "array"
     )
     private List<BalanceDTO> balances;
