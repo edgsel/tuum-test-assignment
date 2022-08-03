@@ -5,7 +5,6 @@ import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.converter.AccountConverter;
 import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
-import com.edgsel.tuumtestassignment.util.BalanceUtil;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
@@ -58,8 +57,7 @@ public class AccountService {
             log.info("Account with ID {} found", existingAccount.getId());
 
             List<Transaction> transactions = transactionMapper.getAllByAccountId(existingAccount.getId());
-            Map<String, BigDecimal> calculatedBalances = getCalculatedBalances(transactions, existingAccount);
-            List<BalanceDTO> mappedBalances = mapBalancesToDto(calculatedBalances);
+            List<BalanceDTO> mappedBalances = getCalculatedBalances(transactions, existingAccount);
 
             AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
             response.setBalances(mappedBalances);
@@ -70,16 +68,19 @@ public class AccountService {
         throw new EntityNotFoundException("Account with ID " + accountId + " not found");
     }
 
-    private Map<String, BigDecimal> getCalculatedBalances(
+    private List<BalanceDTO> getCalculatedBalances(
         List<Transaction> existingTransactions,
         Account existingAccount
     ) {
+        Map<String, BigDecimal> balances;
         if (isEmpty(existingTransactions)) {
             log.warn("Account with ID {} does not have any transactions", existingAccount.getId());
-            return getInitialBalances(existingAccount.getCurrencies());
+            balances = getInitialBalances(existingAccount.getCurrencies());
+        } else {
+            log.info("Found {} transactions for account ID {}", existingTransactions.size(), existingAccount.getId());
+            balances = calculateBalances(existingTransactions);
         }
 
-        log.info("Found {} transactions for account ID {}", existingTransactions.size(), existingAccount.getId());
-        return calculateBalances(existingTransactions);
+        return mapBalancesToDto(balances);
     }
 }
