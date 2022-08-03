@@ -28,6 +28,8 @@ public class Transaction {
 
     private TransactionType transactionType;
 
+    private String description;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

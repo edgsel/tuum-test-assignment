@@ -31,6 +31,7 @@ public class TransactionMapperTest {
             .amount(new BigDecimal("6.66"))
             .currency(Currency.GBP)
             .transactionType(TransactionType.IN)
+            .description("test-test-test")
             .build();
 
         transactionMapper.insert(transaction);
@@ -46,6 +47,7 @@ public class TransactionMapperTest {
         assertThat(transaction.getAmount()).isEqualTo("6.66");
         assertThat(transaction.getCurrency().name()).isEqualTo("GBP");
         assertThat(transaction.getTransactionType().name()).isEqualTo("IN");
+        assertThat(transaction.getDescription()).isEqualTo("test-test-test");
     }
 
     @Test

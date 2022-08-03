@@ -20,6 +20,7 @@ public interface TransactionMapper {
         @Result(property = "amount", column = "amount"),
         @Result(property = "currency", column = "currency"),
         @Result(property = "transactionType", column = "transaction_type"),
+        @Result(property = "description", column = "description"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "updateTime", column = "update_time"),
         @Result(property = "delete_time", column = "delete_time")
@@ -33,13 +34,14 @@ public interface TransactionMapper {
         @Result(property = "amount", column = "amount"),
         @Result(property = "currency", column = "currency"),
         @Result(property = "transactionType", column = "transaction_type"),
+        @Result(property = "description", column = "description"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "updateTime", column = "update_time"),
         @Result(property = "delete_time", column = "delete_time")
     })
     List<Transaction> getAllByAccountId(long accountId);
 
-    @Insert("INSERT INTO transactions(account_id,amount,currency,transaction_type) VALUES (#{accountId}, #{amount}, #{currency}, #{transactionType})")
+    @Insert("INSERT INTO transactions(account_id,amount,currency,transaction_type, description) VALUES (#{accountId}, #{amount}, #{currency}, #{transactionType}, #{description})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(Transaction transaction);
 }
