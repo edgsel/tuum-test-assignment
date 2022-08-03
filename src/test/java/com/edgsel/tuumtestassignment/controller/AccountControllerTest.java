@@ -3,11 +3,12 @@ package com.edgsel.tuumtestassignment.controller;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
-import com.edgsel.tuumtestassignment.controller.validator.AccountValidator;
-import com.edgsel.tuumtestassignment.service.account.AccountService;
+import com.edgsel.tuumtestassignment.controller.validator.RequestValidator;
+import com.edgsel.tuumtestassignment.service.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.MockitoAnnotations.openMocks;
+import static org.springframework.http.HttpStatus.OK;
 
 public class AccountControllerTest {
 
@@ -28,12 +30,12 @@ public class AccountControllerTest {
     private AccountService accountService;
 
     @Mock
-    private AccountValidator accountValidator;
+    private RequestValidator requestValidator;
 
     @BeforeEach
     void setUp() {
         openMocks(this);
-        accountController = spy(new AccountController(accountService, accountValidator));
+        accountController = spy(new AccountController(accountService, requestValidator));
     }
 
     @Test
@@ -51,6 +53,7 @@ public class AccountControllerTest {
 
         ResponseEntity<AccountResponseDTO> response = accountController.createAccount(accountRequest);
 
+        assertEquals(response.getStatusCode(), OK);
         assertEquals(account.getId(), response.getBody().getId());
         assertEquals(account.getCustomerId(), response.getBody().getCustomerId());
         assertEquals(account.getBalances().size(), response.getBody().getBalances().size());
@@ -70,6 +73,7 @@ public class AccountControllerTest {
 
         ResponseEntity<AccountResponseDTO> response = accountController.getAccount(1L);
 
+        assertEquals(response.getStatusCode(), OK);
         assertEquals(account.getId(), response.getBody().getId());
         assertEquals(account.getCustomerId(), response.getBody().getCustomerId());
         assertEquals(account.getBalances().size(), response.getBody().getBalances().size());

@@ -1,4 +1,4 @@
-package com.edgsel.tuumtestassignment.converter.account;
+package com.edgsel.tuumtestassignment.converter;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
@@ -15,11 +15,11 @@ public class AccountConverter {
         this.modelMapper = modelMapper;
     }
 
-    public Account convertDtoToEntity(AccountRequestDTO accountRequestDTO) {
-        return modelMapper.map(accountRequestDTO, Account.class);
+    public Account convertDtoToEntity(AccountRequestDTO accountRequest) {
+        return modelMapper.map(accountRequest, Account.class);
     }
 
-    public AccountResponseDTO entityToDto(Account account) {
+    public AccountResponseDTO convertEntityToDto(Account account) {
         return modelMapper.map(account, AccountResponseDTO.class);
     }
 }

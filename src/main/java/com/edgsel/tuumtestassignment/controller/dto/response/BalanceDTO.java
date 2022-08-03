@@ -1,6 +1,7 @@
 package com.edgsel.tuumtestassignment.controller.dto.response;
 
 import com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Schema(description = "Balance object")
 public class BalanceDTO {
 

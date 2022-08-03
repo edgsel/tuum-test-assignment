@@ -5,6 +5,7 @@ CREATE TABLE transactions
     amount           DECIMAL(10, 2)              DEFAULT 0.00,
     currency         VARCHAR,
     transaction_type VARCHAR            NOT NULL,
+    description      VARCHAR            NOT NULL,
     create_time      TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time      TIMESTAMP                   DEFAULT CURRENT_TIMESTAMP,
     delete_time      TIMESTAMP                   DEFAULT NULL

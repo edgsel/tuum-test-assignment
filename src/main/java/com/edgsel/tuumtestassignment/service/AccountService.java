@@ -1,11 +1,10 @@
-package com.edgsel.tuumtestassignment.service.account;
+package com.edgsel.tuumtestassignment.service;
 
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
-import com.edgsel.tuumtestassignment.converter.account.AccountConverter;
-import com.edgsel.tuumtestassignment.exception.AccountNotFoundException;
-import com.edgsel.tuumtestassignment.helper.BalanceHelper;
+import com.edgsel.tuumtestassignment.converter.AccountConverter;
+import com.edgsel.tuumtestassignment.exception.EntityNotFoundException;
 import com.edgsel.tuumtestassignment.mybatis.Account;
 import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
@@ -14,10 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.calculateBalances;
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.getInitialBalances;
+import static com.edgsel.tuumtestassignment.util.BalanceUtil.mapBalancesToDto;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
@@ -40,8 +41,8 @@ public class AccountService {
         this.transactionMapper = transactionMapper;
     }
 
-    public long saveAccount(AccountRequestDTO accountRequestDTO) {
-        Account account = accountConverter.convertDtoToEntity(accountRequestDTO);
+    public long saveAccount(AccountRequestDTO accountRequest) {
+        Account account = accountConverter.convertDtoToEntity(accountRequest);
 
         accountMapper.insert(account);
 
@@ -54,24 +55,32 @@ public class AccountService {
 
         if (existingAccount != null) {
             log.info("Account with ID {} found", existingAccount.getId());
-            List<Transaction> transactions = transactionMapper.getAllByAccountId(accountId);
-            Map<String, BigDecimal> initialBalances = new HashMap<>();
 
-            if (isEmpty(transactions)) {
-                log.warn("Account with ID {} does not have any transactions", accountId);
-                for (String currency : existingAccount.getCurrencies()) {
-                    initialBalances.put(currency, new BigDecimal("0.00"));
-                }
-            }
+            List<Transaction> transactions = transactionMapper.getAllByAccountId(existingAccount.getId());
+            List<BalanceDTO> mappedBalances = getCalculatedBalances(transactions, existingAccount);
 
-            List<BalanceDTO> balances = BalanceHelper.getBalances(initialBalances);
-            AccountResponseDTO response = accountConverter.entityToDto(existingAccount);
-
-            response.setBalances(balances);
+            AccountResponseDTO response = accountConverter.convertEntityToDto(existingAccount);
+            response.setBalances(mappedBalances);
 
             return response;
         }
 
-        throw new AccountNotFoundException("Account with ID " + accountId + " not found");
+        throw new EntityNotFoundException("Account with ID " + accountId + " not found");
+    }
+
+    private List<BalanceDTO> getCalculatedBalances(
+        List<Transaction> existingTransactions,
+        Account existingAccount
+    ) {
+        Map<String, BigDecimal> balances;
+        if (isEmpty(existingTransactions)) {
+            log.warn("Account with ID {} does not have any transactions", existingAccount.getId());
+            balances = getInitialBalances(existingAccount.getCurrencies());
+        } else {
+            log.info("Found {} transactions for account ID {}", existingTransactions.size(), existingAccount.getId());
+            balances = calculateBalances(existingTransactions);
+        }
+
+        return mapBalancesToDto(balances);
     }
 }
