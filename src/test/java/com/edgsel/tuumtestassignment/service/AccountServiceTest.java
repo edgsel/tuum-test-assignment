@@ -5,6 +5,7 @@ import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
 import com.edgsel.tuumtestassignment.converter.AccountConverter;
 import com.edgsel.tuumtestassignment.mybatis.Account;
+import com.edgsel.tuumtestassignment.mybatis.Transaction;
 import com.edgsel.tuumtestassignment.mybatis.mappers.AccountMapper;
 import com.edgsel.tuumtestassignment.mybatis.mappers.TransactionMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +13,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.edgsel.tuumtestassignment.controller.dto.enums.CurrencyDTO.EUR;
+import static com.edgsel.tuumtestassignment.mybatis.enums.TransactionType.IN;
+import static com.edgsel.tuumtestassignment.mybatis.enums.TransactionType.OUT;
+import static com.edgsel.tuumtestassignment.testHelpers.TransactionsTestHelper.getTestingTransaction;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -83,6 +88,43 @@ public class AccountServiceTest {
 
         assertEquals(expected, response);
         assertEquals(balances.size(), response.getBalances().size());
+    }
 
+    @Test
+    void shouldGetExistingAccountWithCalculatedBalances() {
+        long existingAccountId = 1L;
+        Account existingAccount = Account.builder()
+            .id(1L)
+            .customerId("test-customer-id")
+            .country("EST")
+            .currencies(singletonList("EUR"))
+            .build();
+
+        List<BalanceDTO> expectedBalances = singletonList(
+            BalanceDTO.builder()
+                .currency(EUR)
+                .amount(new BigDecimal("666.33"))
+                .build()
+        );
+
+        AccountResponseDTO expected = new AccountResponseDTO(existingAccountId, "test-customer-id", expectedBalances);
+        List<Transaction> transactions = new ArrayList<>();
+
+        transactions.add(getTestingTransaction(1L, 1L, new BigDecimal("333.33"), IN));
+        transactions.add(getTestingTransaction(2L, 1L, new BigDecimal("333.00"), IN));
+        transactions.add(getTestingTransaction(3L, 1L, new BigDecimal("333.00"), IN));
+        transactions.add(getTestingTransaction(2L, 1L, new BigDecimal("333.00"), OUT));
+
+        doReturn(existingAccount).when(accountMapper).findById(existingAccountId);
+        doReturn(transactions).when(transactionMapper).getAllByAccountId(existingAccountId);
+        doReturn(new AccountResponseDTO(existingAccountId, "test-customer-id", null))
+            .when(accountConverter)
+            .convertEntityToDto(existingAccount);
+
+        AccountResponseDTO response = accountService.getAccount(existingAccountId);
+
+        assertEquals(expected, response);
+        assertEquals(expectedBalances.size(), 1);
+        assertEquals(expectedBalances.get(0).getAmount(), BigDecimal.valueOf(666.33));
     }
 }
