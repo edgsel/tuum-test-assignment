@@ -20,6 +20,19 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
       - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: tuum-api-rabbitmq
+    healthcheck:
+      test: ["CMD", "sleep", "5"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   app:
     build:
       context: .
