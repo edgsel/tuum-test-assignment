@@ -55,7 +55,7 @@ Run the project:
 
 # To run apps in docker containers (Tested only on MacOS, [unstable, after building JAR  endpoints are unreachable]) 
 
-###NB!  Tested only on MacOS
+### NB!  Tested only on MacOS
 
 ## 1. ENV variables
 * Prefill ENV variables in Dockerfile
