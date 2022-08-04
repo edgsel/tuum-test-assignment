@@ -1,5 +1,6 @@
 package com.edgsel.tuumtestassignment.service;
 
+import com.edgsel.tuumtestassignment.client.RabbitClient;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
@@ -31,14 +32,18 @@ public class AccountService {
 
     private final TransactionMapper transactionMapper;
 
+    private final RabbitClient rabbitClient;
+
     public AccountService(
         AccountConverter accountConverter,
         AccountMapper accountMapper,
-        TransactionMapper transactionMapper
+        TransactionMapper transactionMapper,
+        RabbitClient rabbitClient
     ) {
         this.accountConverter = accountConverter;
         this.accountMapper = accountMapper;
         this.transactionMapper = transactionMapper;
+        this.rabbitClient = rabbitClient;
     }
 
     public long saveAccount(AccountRequestDTO accountRequest) {
@@ -47,6 +52,8 @@ public class AccountService {
         accountMapper.insert(account);
 
         log.info("Account with ID {} saved into database", account.getId());
+        rabbitClient.send(account, "create");
+
         return account.getId();
     }
 
