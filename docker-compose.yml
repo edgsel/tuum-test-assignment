@@ -15,11 +15,13 @@ services:
     restart: always
     container_name: tuum-api-db
     environment:
-      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_DB: "tuum_bank_data"
       POSTGRES_USER: "${POSTGRES_USERNAME}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
       - "5432:5432"
+    networks:
+      - default
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,19 +34,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - default
 
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    env_file:
-      - .env
     container_name: tuum-api
     ports:
       - "8091:8080"
     depends_on:
       - postgresdb
+      - rabbitmq
     networks:
       - default
-    links:
-      - "postgresdb"

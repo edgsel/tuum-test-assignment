@@ -14,7 +14,7 @@ spring:
         format_sql: false
         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         enable_lazy_load_no_trans: true
-        default_schema: ${POSTGRES_DEFAULT_SCHEMA}
+        default_schema: public
     hibernate:
       ddl-auto: none
     open-in-view: true

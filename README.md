@@ -23,17 +23,18 @@ Docker 4.6.1+
 
 `DB_PORT=`
 
-`DOCKER_BUILDKIT=0`
+`RABBITMQ_USERNAME=`
 
-`COMPOSE_DOCKER_CLI_BUILD=0`
+`RABBITMQ_PASSWORD=`
+
 
 # To run application locally
 
 ## 1. Export environment variables (Linux/MacOS)
 * `export $(xargs < .env)`
 
-## 2. Start up DB container
-* `docker-compose up -d postgresdb`
+## 2. Start up DB and RabbitMQ containers
+* `docker-compose up -d postgresdb rabbitmq`
 
 ## 3. NB! run DB migrations
 * ` ./gradlew flywayMigrate -i`
@@ -52,10 +53,20 @@ Run tests:
 Run the project:
 * `./gradlew bootRun`
 
-## API docs
-* for Storage API docs go to `http://localhost:8091/api/v1/swagger-ui/index.html`
+# To run apps in docker containers (Tested only on MacOS, [unstable, after building JAR  endpoints are unreachable]) 
 
-## What is missing
-* Transaction endpoints (GET/POST)
-* Transaction service
-* RabbitMQ
+###NB!  Tested only on MacOS
+
+## 1. ENV variables
+* Prefill ENV variables in Dockerfile
+* Set `DB_HOST` to `host.docker.internal`
+
+## 2. Start up DB and RabbitMQ containers
+To make our API pass integration tests and run API 
+* `docker-compose up -d postgresdb rabbitmq`
+
+## 3. Run API
+* `docker-compose up -d app`
+
+## API docs
+* for Tuum API docs go to `http://localhost:8091/api/v1/swagger-ui/index.html`

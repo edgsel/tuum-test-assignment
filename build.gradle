@@ -49,3 +49,7 @@ flyway {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archiveFileName='tuum-test-assignment-1.0.0.jar'
+}
