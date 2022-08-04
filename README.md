@@ -68,5 +68,5 @@ To make our API pass integration tests and run API
 ## 3. Run API
 * `docker-compose up -d app`
 
-## API docs
+# API docs
 * for Tuum API docs go to `http://localhost:8091/api/v1/swagger-ui/index.html`
