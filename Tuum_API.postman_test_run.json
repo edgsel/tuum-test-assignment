@@ -1,0 +1,77 @@
+{
+	"id": "8c836139-56a1-4d35-aaf6-27dfd0d5600a",
+	"name": "Tuum API",
+	"timestamp": "2022-08-04T19:57:28.091Z",
+	"collection_id": "0-1d01ebb4-3c01-4ac5-926b-bd012e00e7e8",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "4c47e9c4-ad48-45e4-ba06-0b92e0af1ac2",
+			"name": "Create transaction",
+			"time": 86,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				112,
+				60,
+				133,
+				120,
+				91,
+				109,
+				97,
+				110,
+				105,
+				88,
+				73,
+				40,
+				74,
+				80,
+				58,
+				62,
+				75,
+				83,
+				116,
+				86
+			],
+			"allTests": [
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{}
+			]
+		}
+	],
+	"count": 20,
+	"totalTime": 1772,
+	"collection": {
+		"requests": [
+			{
+				"id": "4c47e9c4-ad48-45e4-ba06-0b92e0af1ac2",
+				"method": "POST"
+			}
+		]
+	}
+}
