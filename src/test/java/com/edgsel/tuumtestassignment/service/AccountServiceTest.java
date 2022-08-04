@@ -1,5 +1,6 @@
 package com.edgsel.tuumtestassignment.service;
 
+import com.edgsel.tuumtestassignment.client.RabbitClient;
 import com.edgsel.tuumtestassignment.controller.dto.request.AccountRequestDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.AccountResponseDTO;
 import com.edgsel.tuumtestassignment.controller.dto.response.BalanceDTO;
@@ -45,10 +46,15 @@ public class AccountServiceTest {
     @Mock
     private TransactionMapper transactionMapper;
 
+    @Mock
+    private RabbitClient rabbitClient;
+
     @BeforeEach
     void setUp() {
         openMocks(this);
-        accountService = spy(new AccountService(accountConverter, accountMapper, transactionMapper));
+        accountService = spy(
+            new AccountService(accountConverter, accountMapper, transactionMapper, rabbitClient)
+        );
     }
 
     @Test
@@ -61,6 +67,7 @@ public class AccountServiceTest {
         accountService.saveAccount(accountRequest);
 
         verify(accountMapper).insert(account);
+        verify(rabbitClient).send(account, "create");
     }
 
     @Test
