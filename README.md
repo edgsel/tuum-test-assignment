@@ -54,8 +54,7 @@ Run the project:
 # To run apps in docker containers (NB!  Tested only on MacOS) 
 
 ## 1. ENV variables
-* Prefill ENV variables in Dockerfile
-* Set `HOST` to `host.docker.internal`
+* Prefill ENV variables in Dockerfile (Set `HOST` to `host.docker.internal`)
 
 ## 2. Start up DB and RabbitMQ containers
 To make our API pass integration tests and run API 
@@ -77,6 +76,8 @@ To make our API pass integration tests and run API
 * Insert methods could return stored object immediately
 * DTO/Entity converters could be refactored to use Java generics
 
+
+# Q/A
 ## Estimate on how many transactions can your account application can handle per second on your development machine
 * Workstation: Macbook PRO 14 (M1 PRO, 16GB, 1TB)
 
