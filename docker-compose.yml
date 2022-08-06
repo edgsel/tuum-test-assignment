@@ -21,7 +21,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - default
+      - tuum-network
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -35,7 +35,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - default
+      - tuum-network
 
   app:
     build:
@@ -47,4 +47,10 @@ services:
       - postgresdb
       - rabbitmq
     networks:
-      - default
+      - tuum-network
+
+networks:
+  tuum-network:
+    driver: bridge
+    ipam:
+      driver: default
