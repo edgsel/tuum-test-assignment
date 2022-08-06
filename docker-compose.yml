@@ -1,12 +1,9 @@
 version: '3'
 services:
   postgresdb:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: postgres:latest
     env_file:
       - .env
-    image: "postgres:latest"
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U"]
       timeout: 45s

@@ -1,5 +1,3 @@
-FROM postgres:14.2
-
 FROM gradle:7.5-jdk11 AS build
 
 #ENV HOST=host.docker.internal
