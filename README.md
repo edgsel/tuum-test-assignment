@@ -28,8 +28,8 @@ Docker 4.6.1+
 
 # To run application locally
 
-## 1. Export environment variables (Linux/MacOS)
-* `export $(xargs < .env)`
+## 1. Set and export ENV variables (Linux/MacOS)
+* `export $(xargs < .env)`(Set `HOST=host.docker.internal`)
 
 ## 2. Start up DB and RabbitMQ containers
 * `docker-compose up -d postgresdb rabbitmq`
@@ -53,8 +53,8 @@ Run the project:
 
 # To run apps in docker containers (NB!  Tested only on MacOS) 
 
-## 1. ENV variables
-* Prefill ENV variables in Dockerfile (Set `HOST` to `host.docker.internal`)
+## 1.Set ENV variables
+* Prefill ENV variables in Dockerfile (Set `HOST=host.docker.internal`)
 
 ## 2. Start up DB and RabbitMQ containers
 To make our API pass integration tests and run API 
@@ -64,7 +64,7 @@ To make our API pass integration tests and run API
 * `docker-compose build -d app`
 
 ## 4. Run app
-* Find the image name of the app with `docker image ls`. Usually image's name is `tuum-test-assignment_app`
+* Find the app image name with `docker image ls` (usually image's name is `tuum-test-assignment_app`)
 * Boot up the app with `docker run -it -p 8091:8091 --env-file .env tuum-test-assignment_app`
 
 # API docs
