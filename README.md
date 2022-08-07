@@ -11,6 +11,8 @@ Docker 4.6.1+
 
 ## Required ENV variables:
 
+`HOST=`
+
 `POSTGRES_DB=tuum_bank_data`
 
 `POSTGRES_DEFAULT_SCHEMA=public`
@@ -19,10 +21,6 @@ Docker 4.6.1+
 
 `POSTGRES_PASSWORD=`
 
-`DB_HOST=`
-
-`DB_PORT=`
-
 `RABBITMQ_USERNAME=`
 
 `RABBITMQ_PASSWORD=`
@@ -30,8 +28,8 @@ Docker 4.6.1+
 
 # To run application locally
 
-## 1. Export environment variables (Linux/MacOS)
-* `export $(xargs < .env)`
+## 1. Set and export ENV variables (Linux/MacOS)
+* `export $(xargs < .env)`(Set `HOST=host.docker.internal`)
 
 ## 2. Start up DB and RabbitMQ containers
 * `docker-compose up -d postgresdb rabbitmq`
@@ -53,20 +51,21 @@ Run tests:
 Run the project:
 * `./gradlew bootRun`
 
-# To run apps in docker containers (Tested only on MacOS, [unstable, after building JAR  endpoints are unreachable]) 
+# To run apps in docker containers (NB!  Tested only on MacOS) 
 
-### NB!  Tested only on MacOS
-
-## 1. ENV variables
-* Prefill ENV variables in Dockerfile
-* Set `DB_HOST` to `host.docker.internal`
+## 1.Set ENV variables
+* Prefill ENV variables in Dockerfile (Set `HOST=host.docker.internal`)
 
 ## 2. Start up DB and RabbitMQ containers
 To make our API pass integration tests and run API 
 * `docker-compose up -d postgresdb rabbitmq`
 
-## 3. Run API
-* `docker-compose up -d app`
+## 3. Build app image
+* `docker-compose build -d app`
+
+## 4. Run app
+* Find the app image name with `docker image ls` (usually image's name is `tuum-test-assignment_app`)
+* Boot up the app with `docker run -it -p 8091:8091 --env-file .env tuum-test-assignment_app`
 
 # API docs
 * for Tuum API docs go to `http://localhost:8091/api/v1/swagger-ui/index.html`
@@ -76,8 +75,9 @@ To make our API pass integration tests and run API
 * Instead of calculating balance every time when request is done, store balances in a separate table
 * Insert methods could return stored object immediately
 * DTO/Entity converters could be refactored to use Java generics
-* JAR file do not include all packages resulting in non-working docker container
 
+
+# Q/A
 ## Estimate on how many transactions can your account application can handle per second on your development machine
 * Workstation: Macbook PRO 14 (M1 PRO, 16GB, 1TB)
 

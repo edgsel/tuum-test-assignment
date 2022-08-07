@@ -1,13 +1,11 @@
-FROM postgres:14.2
-
 FROM gradle:7.5-jdk11 AS build
+
+#ENV HOST=host.docker.internal
 
 #ENV POSTGRES_DB=tuum_bank_data
 #ENV POSTGRES_DEFAULT_SCHEMA=public
 #ENV POSTGRES_USERNAME=
 #ENV POSTGRES_PASSWORD=
-#ENV DB_HOST=host.docker.internal
-#ENV DB_PORT=5432
 #ENV RABBITMQ_USERNAME=
 #ENV RABBITMQ_PASSWORD=
 

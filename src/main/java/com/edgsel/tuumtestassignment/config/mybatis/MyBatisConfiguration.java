@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan("com.edgsel.tuumtestassignment.myBatis.mappers")
+@MapperScan("com.edgsel.tuumtestassignment.mybatis.mappers")
 public class MyBatisConfiguration {
 
     private final DataSource dataSource;
